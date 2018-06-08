@@ -345,10 +345,10 @@
         "stack": false,
         "steppedLine": false,
         "targets": [{
-          "expr": "rate(namedprocess_namegroup_cpu_seconds_total{groupname=~\"$processes\"}[$interval])",
+          "expr": "rate(namedprocess_namegroup_cpu_user_seconds_total{groupname=~\"$processes\"}[$interval]) + rate(namedprocess_namegroup_cpu_system_seconds_total{groupname=~\"$processes\"}[$interval])",
           "intervalFactor": 2,
           "legendFormat": "{{groupname}}",
-          "metric": "process_namegroup_cpu_seconds_total",
+          "metric": "namedprocess_namegroup_cpu_seconds_total",
           "refId": "A",
           "step": 10
         }],
@@ -729,7 +729,7 @@
           "multi": true,
           "name": "processes",
           "options": [],
-          "query": "label_values(namedprocess_namegroup_cpu_seconds_total,groupname)",
+          "query": "label_values(namedprocess_namegroup_cpu_system_seconds_total,groupname)",
           "refresh": 1,
           "regex": "",
           "sort": 0,

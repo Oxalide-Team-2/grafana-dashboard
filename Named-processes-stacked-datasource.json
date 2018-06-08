@@ -346,7 +346,7 @@
         "stack": true,
         "steppedLine": false,
         "targets": [{
-          "expr": "rate(namedprocess_namegroup_cpu_system_seconds_total{groupname=~\"$processes\"}[$interval])",
+          "expr": "rate(namedprocess_namegroup_cpu_user_seconds_total{groupname=~\"$processes\"}[$interval]) + rate(namedprocess_namegroup_cpu_system_seconds_total{groupname=~\"$processes\"}[$interval])",
           "format": "time_series",
           "intervalFactor": 2,
           "legendFormat": "{{groupname}}",
