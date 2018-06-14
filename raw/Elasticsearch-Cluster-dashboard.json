@@ -42,25 +42,13 @@
       }
     ]
   },
-  "description": "Process metrics exported by https://github.com/ncabatoff/process-exporter.",
+  "description": "Graphs at the elasticsearch cluster level",
   "editable": true,
-  "gnetId": 249,
-  "graphTooltip": 1,
+  "gnetId": 3257,
+  "graphTooltip": 0,
   "id": null,
-  "iteration": 1527688898631,
-  "links": [
-    {
-      "asDropdown": true,
-      "icon": "external link",
-      "includeVars": true,
-      "keepTime": true,
-      "tags": [
-        "OS"
-      ],
-      "title": "OS",
-      "type": "dashboards"
-    }
-  ],
+  "iteration": 1527618024323,
+  "links": [],
   "panels": [
     {
       "aliasColors": {},
@@ -68,29 +56,29 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "editable": true,
-      "error": false,
+      "decimals": 0,
       "fill": 1,
-      "grid": {},
       "gridPos": {
         "h": 7,
-        "w": 12,
+        "w": 24,
         "x": 0,
         "y": 0
       },
-      "id": 1,
-      "isNew": true,
+      "id": 14,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
-        "current": false,
+        "current": true,
         "max": false,
         "min": false,
+        "rightSide": true,
         "show": true,
+        "sideWidth": 350,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
-      "linewidth": 2,
+      "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
       "percentage": false,
@@ -103,109 +91,35 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "namedprocess_namegroup_num_procs{groupname=~\"$processes\"}",
-          "intervalFactor": 2,
-          "legendFormat": "{{groupname}}",
-          "metric": "process_namegroup_num_procs",
-          "refId": "A",
-          "step": 10
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "num processes",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ]
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "editable": true,
-      "error": false,
-      "fill": 1,
-      "grid": {},
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 0
-      },
-      "id": 7,
-      "isNew": true,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "sum(irate(namedprocess_namegroup_cpu_system_seconds_total{groupname=~\"$processes\"}[5m])) by (groupname)\n",
+          "expr": "elasticsearch_cluster_health_number_of_data_nodes{job=\"elasticsearch-exporter\",cluster=~\"$cluster\"}",
           "format": "time_series",
+          "hide": false,
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{groupname}}",
-          "metric": "process_namegroup_num_procs",
+          "legendFormat": "{{instance}}  -  data_nodes",
+          "refId": "B",
+          "step": 2,
+          "target": ""
+        },
+        {
+          "expr": "elasticsearch_cluster_health_number_of_nodes{job=\"elasticsearch-exporter\",cluster=~\"$cluster\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{instance}}  -  nodes (total)",
           "refId": "A",
-          "step": 10
+          "step": 2,
+          "target": ""
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "system cpu usage",
+      "title": "number_of_nodes",
       "tooltip": {
-        "msResolution": false,
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -218,8 +132,8 @@
       },
       "yaxes": [
         {
-          "format": "short",
-          "label": null,
+          "format": "none",
+          "label": "",
           "logBase": 1,
           "max": null,
           "min": null,
@@ -241,29 +155,29 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "editable": true,
-      "error": false,
+      "decimals": 0,
       "fill": 1,
-      "grid": {},
       "gridPos": {
         "h": 7,
-        "w": 12,
+        "w": 24,
         "x": 0,
         "y": 7
       },
-      "id": 3,
-      "isNew": true,
+      "id": 15,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
         "show": true,
+        "sideWidth": 350,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
-      "linewidth": 2,
+      "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
       "percentage": false,
@@ -276,22 +190,46 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "rate(namedprocess_namegroup_read_bytes_total{groupname=~\"$processes\"}[$interval])",
+          "expr": "elasticsearch_cluster_health_number_of_in_flight_fetch{job=\"elasticsearch-exporter\",cluster=~\"$cluster\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{groupname}}",
-          "metric": "namedprocess_namegroup_read_bytes_total",
+          "legendFormat": "{{instance}}  -  in_flight_fetch",
+          "refId": "B",
+          "step": 2,
+          "target": ""
+        },
+        {
+          "expr": "elasticsearch_cluster_health_number_of_pending_tasks{job=\"elasticsearch-exporter\",cluster=~\"$cluster\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{instance}}  -  pending_tasks",
           "refId": "A",
-          "step": 10
+          "step": 2,
+          "target": ""
+        },
+        {
+          "expr": "elasticsearch_cluster_health_timed_out{job=\"elasticsearch-exporter\",cluster=~\"$cluster\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{instance}}  -  timed_out",
+          "refId": "C",
+          "step": 2,
+          "target": ""
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "read bytes",
+      "title": "health_number_of",
       "tooltip": {
-        "msResolution": false,
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -304,11 +242,11 @@
       },
       "yaxes": [
         {
-          "format": "Bps",
-          "label": null,
+          "format": "none",
+          "label": "",
           "logBase": 1,
           "max": null,
-          "min": 0,
+          "min": null,
           "show": true
         },
         {
@@ -327,115 +265,29 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "editable": true,
-      "error": false,
+      "decimals": 0,
       "fill": 1,
-      "grid": {},
       "gridPos": {
         "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 7
-      },
-      "id": 2,
-      "isNew": true,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "rate(namedprocess_namegroup_cpu_seconds_total{groupname=~\"$processes\"}[$interval])",
-          "intervalFactor": 2,
-          "legendFormat": "{{groupname}}",
-          "metric": "process_namegroup_cpu_seconds_total",
-          "refId": "A",
-          "step": 10
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "cpu",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 0,
-        "value_type": "cumulative"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "s",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": 0,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ]
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "editable": true,
-      "error": false,
-      "fill": 1,
-      "grid": {},
-      "gridPos": {
-        "h": 7,
-        "w": 12,
+        "w": 24,
         "x": 0,
         "y": 14
       },
-      "id": 5,
-      "isNew": true,
+      "id": 12,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
         "show": true,
+        "sideWidth": 350,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
-      "linewidth": 2,
+      "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
       "percentage": false,
@@ -448,22 +300,24 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "namedprocess_namegroup_memory_bytes{groupname=~\"$processes\", memtype=\"resident\"}",
+          "expr": "elasticsearch_cluster_health_active_primary_shards{job=\"elasticsearch-exporter\",cluster=~\"$cluster\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{groupname}}",
-          "metric": "namedprocess_namegroup_memory_bytes",
-          "refId": "A",
-          "step": 10
+          "legendFormat": "{{instance}}",
+          "refId": "B",
+          "step": 2,
+          "target": ""
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "resident memory",
+      "title": "active_primary_shards",
       "tooltip": {
-        "msResolution": false,
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -476,11 +330,11 @@
       },
       "yaxes": [
         {
-          "format": "bytes",
-          "label": null,
+          "format": "none",
+          "label": "",
           "logBase": 1,
           "max": null,
-          "min": 0,
+          "min": null,
           "show": true
         },
         {
@@ -499,115 +353,29 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "Prometheus",
-      "editable": true,
-      "error": false,
+      "decimals": 0,
       "fill": 1,
-      "grid": {},
       "gridPos": {
         "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 14
-      },
-      "id": 4,
-      "isNew": true,
-      "legend": {
-        "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
-        "show": true,
-        "total": false,
-        "values": false
-      },
-      "lines": true,
-      "linewidth": 2,
-      "links": [],
-      "nullPointMode": "null",
-      "percentage": false,
-      "pointradius": 5,
-      "points": false,
-      "renderer": "flot",
-      "seriesOverrides": [],
-      "spaceLength": 10,
-      "stack": false,
-      "steppedLine": false,
-      "targets": [
-        {
-          "expr": "rate(namedprocess_namegroup_write_bytes_total{groupname=~\"$processes\"}[$interval])",
-          "intervalFactor": 2,
-          "legendFormat": "{{groupname}}",
-          "metric": "namedprocess_namegroup_read_bytes_total",
-          "refId": "A",
-          "step": 10
-        }
-      ],
-      "thresholds": [],
-      "timeFrom": null,
-      "timeShift": null,
-      "title": "write bytes",
-      "tooltip": {
-        "msResolution": false,
-        "shared": true,
-        "sort": 0,
-        "value_type": "individual"
-      },
-      "type": "graph",
-      "xaxis": {
-        "buckets": null,
-        "mode": "time",
-        "name": null,
-        "show": true,
-        "values": []
-      },
-      "yaxes": [
-        {
-          "format": "Bps",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": 0,
-          "show": true
-        },
-        {
-          "format": "short",
-          "label": null,
-          "logBase": 1,
-          "max": null,
-          "min": null,
-          "show": true
-        }
-      ]
-    },
-    {
-      "aliasColors": {},
-      "bars": false,
-      "dashLength": 10,
-      "dashes": false,
-      "datasource": "Prometheus",
-      "editable": true,
-      "error": false,
-      "fill": 1,
-      "grid": {},
-      "gridPos": {
-        "h": 7,
-        "w": 12,
-        "x": 12,
+        "w": 24,
+        "x": 0,
         "y": 21
       },
-      "id": 6,
-      "isNew": true,
+      "id": 17,
       "legend": {
+        "alignAsTable": true,
         "avg": false,
-        "current": false,
-        "max": false,
-        "min": false,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
         "show": true,
+        "sideWidth": 350,
         "total": false,
-        "values": false
+        "values": true
       },
       "lines": true,
-      "linewidth": 2,
+      "linewidth": 1,
       "links": [],
       "nullPointMode": "null",
       "percentage": false,
@@ -620,22 +388,24 @@
       "steppedLine": false,
       "targets": [
         {
-          "expr": "namedprocess_namegroup_memory_bytes{groupname=~\"$processes\", memtype=\"virtual\"}",
+          "expr": "elasticsearch_cluster_health_active_shards{job=\"elasticsearch-exporter\",cluster=~\"$cluster\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
           "intervalFactor": 2,
-          "legendFormat": "{{groupname}}",
-          "metric": "namedprocess_namegroup_memory_bytes",
+          "legendFormat": "{{instance}}  -  active (total)",
           "refId": "A",
-          "step": 10
+          "step": 2,
+          "target": ""
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "virtual memory",
+      "title": "active_shards",
       "tooltip": {
-        "msResolution": false,
         "shared": true,
-        "sort": 0,
+        "sort": 2,
         "value_type": "individual"
       },
       "type": "graph",
@@ -648,11 +418,363 @@
       },
       "yaxes": [
         {
-          "format": "bytes",
+          "format": "none",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
           "label": null,
           "logBase": 1,
           "max": null,
-          "min": 0,
+          "min": null,
+          "show": true
+        }
+      ]
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "decimals": 0,
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 28
+      },
+      "id": 18,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 350,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "elasticsearch_cluster_health_delayed_unassigned_shards{job=\"elasticsearch-exporter\",cluster=~\"$cluster\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{instance}}  -  delayed_unassigned",
+          "refId": "C",
+          "step": 2,
+          "target": ""
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "delayed_unassigned_shards",
+      "tooltip": {
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ]
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "decimals": 0,
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 35
+      },
+      "id": 19,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 350,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "elasticsearch_cluster_health_initializing_shards{job=\"elasticsearch-exporter\",cluster=~\"$cluster\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{instance}}  -  initializing",
+          "refId": "D",
+          "step": 2,
+          "target": ""
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "initializing_shards",
+      "tooltip": {
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ]
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "decimals": 0,
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 42
+      },
+      "id": 20,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 350,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "elasticsearch_cluster_health_relocating_shards{job=\"elasticsearch-exporter\",cluster=~\"$cluster\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{instance}}  -  relocating",
+          "refId": "E",
+          "step": 2,
+          "target": ""
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "relocating_shards",
+      "tooltip": {
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ]
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "Prometheus",
+      "decimals": 0,
+      "fill": 1,
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 49
+      },
+      "id": 21,
+      "legend": {
+        "alignAsTable": true,
+        "avg": false,
+        "current": true,
+        "max": true,
+        "min": true,
+        "rightSide": true,
+        "show": true,
+        "sideWidth": 350,
+        "total": false,
+        "values": true
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "expr": "elasticsearch_cluster_health_unassigned_shards{job=\"elasticsearch-exporter\",cluster=~\"$cluster\"}",
+          "format": "time_series",
+          "hide": false,
+          "interval": "",
+          "intervalFactor": 2,
+          "legendFormat": "{{instance}}",
+          "refId": "F",
+          "step": 2,
+          "target": ""
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "unassigned_shards",
+      "tooltip": {
+        "shared": true,
+        "sort": 2,
+        "value_type": "individual"
+      },
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "none",
+          "label": "",
+          "logBase": 1,
+          "max": null,
+          "min": null,
           "show": true
         },
         {
@@ -669,100 +791,23 @@
   "refresh": "10s",
   "schemaVersion": 16,
   "style": "dark",
-  "tags": [
-    "OS"
-  ],
+  "tags": [],
   "templating": {
     "list": [
       {
-        "auto": false,
-        "auto_count": 30,
-        "auto_min": "10s",
-        "current": {
-          "text": "10m",
-          "value": "10m"
-        },
-        "datasource": null,
-        "hide": 0,
-        "includeAll": false,
-        "label": "",
-        "multi": false,
-        "name": "interval",
-        "options": [
-          {
-            "selected": false,
-            "text": "1m",
-            "value": "1m"
-          },
-          {
-            "selected": false,
-            "text": "5m",
-            "value": "5m"
-          },
-          {
-            "selected": true,
-            "text": "10m",
-            "value": "10m"
-          },
-          {
-            "selected": false,
-            "text": "30m",
-            "value": "30m"
-          },
-          {
-            "selected": false,
-            "text": "1h",
-            "value": "1h"
-          },
-          {
-            "selected": false,
-            "text": "6h",
-            "value": "6h"
-          },
-          {
-            "selected": false,
-            "text": "12h",
-            "value": "12h"
-          },
-          {
-            "selected": false,
-            "text": "1d",
-            "value": "1d"
-          },
-          {
-            "selected": false,
-            "text": "7d",
-            "value": "7d"
-          },
-          {
-            "selected": false,
-            "text": "14d",
-            "value": "14d"
-          },
-          {
-            "selected": false,
-            "text": "30d",
-            "value": "30d"
-          }
-        ],
-        "query": "1m,5m,10m,30m,1h,6h,12h,1d,7d,14d,30d",
-        "refresh": 2,
-        "type": "interval"
-      },
-      {
-        "allValue": ".+",
+        "allValue": null,
         "current": {},
         "datasource": "Prometheus",
         "hide": 0,
-        "includeAll": true,
+        "includeAll": false,
         "label": null,
-        "multi": true,
-        "name": "processes",
+        "multi": false,
+        "name": "cluster",
         "options": [],
-        "query": "label_values(namedprocess_namegroup_cpu_seconds_total,groupname)",
-        "refresh": 1,
-        "regex": "",
-        "sort": 0,
+        "query": "label_values(elasticsearch_indices_docs{job=\"elasticsearch-exporter\"}, cluster)",
+        "refresh": 2,
+        "regex": "/([^:]+)/",
+        "sort": 1,
         "tagValuesQuery": "",
         "tags": [],
         "tagsQuery": "",
@@ -772,7 +817,7 @@
     ]
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-30m",
     "to": "now"
   },
   "timepicker": {
@@ -801,7 +846,7 @@
     ]
   },
   "timezone": "browser",
-  "title": "Named processes",
-  "uid": "h_xCpuViz",
-  "version": 2
+  "title": "Elasticsearch - Cluster",
+  "uid": "8YYdOwVmz",
+  "version": 1
 }
